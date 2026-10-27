@@ -1,180 +1,140 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b0d14">
-<title>Nishflix LK | Media Center</title>
-
+<title>Nishflix LK | Smart Media Center</title>
 <style>
-* { box-sizing: border-box; }
-
+:root {
+  --bg:#0b0d14;
+  --panel:#171b27;
+  --line:#303648;
+  --text:#f7f7fb;
+  --muted:#a6adbd;
+  --red:#e11d48;
+}
+* {box-sizing:border-box}
 body {
-  margin: 0;
-  background: #0b0d14;
-  color: white;
-  font-family: Arial, sans-serif;
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,Arial,sans-serif;
 }
-
 header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 20px;
-  border-bottom: 1px solid #303546;
+  display:flex;align-items:center;gap:12px;
+  padding:18px 5%;border-bottom:1px solid var(--line);
 }
-
 .logo {
-  background: #e11d48;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 22px;
+  display:grid;place-items:center;width:48px;height:48px;
+  background:var(--red);border-radius:14px;font-size:25px;
 }
-
-header h2 { margin: 0; }
-header small { color: #a6adbd; }
-
-main {
-  max-width: 650px;
-  margin: 25px auto;
-  padding: 15px;
+header h2 {margin:0;font-size:19px}
+header small {color:var(--muted)}
+.lang {
+  margin-left:auto;background:var(--panel);color:white;
+  border:1px solid var(--line);padding:9px 12px;
+  border-radius:10px;
 }
-
+main {width:min(680px,92%);margin:25px auto}
 .panel {
-  background: #171b27;
-  border: 1px solid #303546;
-  border-radius: 18px;
-  padding: 22px;
-  margin-bottom: 18px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:20px;padding:22px;margin-bottom:18px;
 }
-
-h1 { font-size: 34px; }
-p { color: #a6adbd; line-height: 1.6; }
-
-.platforms {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 20px 0;
+.eyebrow {
+  color:#fb7185;letter-spacing:2px;font-size:12px;
+  font-weight:700;
 }
-
+h1 {font-size:clamp(30px,8vw,43px);margin:13px 0}
+h2 {font-size:23px}
+p {color:var(--muted);line-height:1.6}
+.platforms,.features {
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
 .platform {
-  background: #252a38;
-  color: white;
-  border: 1px solid #41485b;
-  border-radius: 12px;
-  padding: 18px 8px;
-  font-size: 16px;
+  background:#242938;color:white;border:1px solid #3a4052;
+  padding:17px 10px;border-radius:14px;font:inherit;
+  cursor:pointer;
 }
-
 .platform.active {
-  background: #49202f;
-  border-color: #fb7185;
+  background:#49202f;border-color:#fb7185;
 }
-
-.platform span {
-  display: block;
-  font-size: 27px;
-  margin-bottom: 8px;
+.platform span {display:block;font-size:27px;margin-bottom:8px}
+label {display:block;margin:16px 0 8px}
+input,select {
+  width:100%;padding:14px;background:#0f121c;color:white;
+  border:1px solid #41485b;border-radius:11px;font:inherit;
 }
-
-input, select {
-  width: 100%;
-  padding: 14px;
-  margin: 8px 0 16px;
-  background: #0f121c;
-  color: white;
-  border: 1px solid #41485b;
-  border-radius: 10px;
-  font-size: 15px;
-}
-
-label { display: block; }
-
 .primary {
-  width: 100%;
-  padding: 15px;
-  background: #e11d48;
-  color: white;
-  border: 0;
-  border-radius: 11px;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 8px;
+  width:100%;padding:15px;margin-top:17px;background:var(--red);
+  color:white;border:0;border-radius:11px;font-weight:700;
+  font-size:16px;cursor:pointer;
 }
-
+.secondary {
+  width:100%;padding:13px;margin-top:10px;background:#252a38;
+  color:white;border:1px solid #41485b;border-radius:11px;
+  font-size:15px;cursor:pointer;
+}
 .notice {
-  padding: 12px;
-  background: #252a38;
-  border-radius: 10px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #c5cada;
+  background:#222638;padding:13px;border-radius:11px;
+  color:#c5cada;font-size:13px;line-height:1.6;margin-top:15px;
 }
-
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #a6adbd;
-  font-size: 12px;
+.feature {
+  background:#202433;border-radius:12px;padding:14px;
 }
-
-#status, #fileStatus {
-  overflow-wrap: anywhere;
+.feature strong {display:block;margin-bottom:5px}
+.feature small {color:var(--muted);line-height:1.5}
+#status,#fileStatus {overflow-wrap:anywhere}
+footer {text-align:center;padding:22px;color:var(--muted);font-size:12px}
+button:focus-visible,input:focus-visible,select:focus-visible {
+  outline:2px solid #fb7185;outline-offset:3px;
+}
+@media(max-width:360px) {
+  .panel {padding:16px}
+  .platforms,.features {gap:8px}
 }
 </style>
 </head>
-
 <body>
-
 <header>
   <div class="logo">▶</div>
   <div>
     <h2>NISHFLIX LK</h2>
-    <small>SMART MEDIA CENTER</small>
+    <small id="tagline">SMART MEDIA CENTER</small>
   </div>
+  <button class="lang" id="langBtn">සිංහල</button>
 </header>
 
 <main>
-
 <section class="panel">
-  <p style="color:#fb7185;letter-spacing:2px">
-    YOUR MEDIA. YOUR WAY.
-  </p>
-  <h1>Welcome to Nishflix LK</h1>
-  <p>Your media, all in one place.</p>
+  <div class="eyebrow" id="eyebrow">YOUR MEDIA. YOUR WAY.</div>
+  <h1 id="welcome">Welcome to Nishflix LK</h1>
+  <p id="intro">Discover and manage your media in one place.</p>
 
   <div class="platforms">
-    <button class="platform active"
-      data-platform="youtube">
+    <button class="platform active" data-platform="youtube">
       <span>▶️</span>YouTube
     </button>
-
-    <button class="platform"
-      data-platform="tiktok">
+    <button class="platform" data-platform="tiktok">
       <span>♪</span>TikTok
     </button>
   </div>
 </section>
 
 <section class="panel">
-  <h2>Media Downloader</h2>
-  <p>Enter a link to continue.</p>
+  <h2 id="mediaTitle">Media Center</h2>
+  <p id="mediaIntro">Choose a platform and enter its link.</p>
 
   <form id="mediaForm">
-    <label for="mediaUrl">Media URL</label>
+    <label id="urlLabel" for="mediaUrl">Media URL</label>
     <input id="mediaUrl" type="url"
-      placeholder="Paste YouTube or TikTok link"
-      required>
+      placeholder="https://..." autocomplete="url" required>
 
-    <label for="format">Download format</label>
+    <label id="formatLabel" for="format">Preferred format</label>
     <select id="format">
       <option value="mp4">MP4 Video</option>
       <option value="mp3">MP3 Audio</option>
     </select>
 
-    <label for="quality">Video quality</label>
+    <label id="qualityLabel" for="quality">Preferred quality</label>
     <select id="quality">
       <option value="best">Best available</option>
       <option value="360p">360p</option>
@@ -184,155 +144,219 @@ footer {
       <option value="audio">Audio only</option>
     </select>
 
-    <button class="primary" type="submit">
-      Continue
+    <button class="primary" id="continueBtn" type="submit">
+      Check link
     </button>
   </form>
 
-  <p id="status" role="status"></p>
-
-  <div class="notice">
-    This is the initial dashboard version.
-    It checks supported links and opens the relevant
-    platform. Actual media extraction requires a
-    separate backend and appropriate permission.
+  <p id="status" role="status" aria-live="polite"></p>
+  <div class="notice" id="mediaNotice">
+    This version checks links and opens the platform.
+    Actual media downloading needs a compatible backend
+    and permission to download the content.
   </div>
 </section>
 
 <section class="panel">
-  <h2>My Media</h2>
-  <p>Save a copy of a media file you own.</p>
+  <h2 id="myMediaTitle">My Media</h2>
+  <p id="myMediaIntro">Save a copy of a file you own.</p>
 
-  <label for="localFile">Choose audio or video</label>
-  <input id="localFile" type="file"
-    accept="audio/*,video/*">
+  <label id="fileLabel" for="localFile">Choose an audio or video file</label>
+  <input id="localFile" type="file" accept="audio/*,video/*">
 
   <button class="primary" id="saveFile" type="button">
     Save selected file
   </button>
-
-  <p id="fileStatus" role="status"></p>
-</section>
-
-<section class="panel">
-  <h2>My Account</h2>
-  <p>
-    Google sign-in and download history will be
-    added after secure backend setup.
-  </p>
-  <div class="notice">
-    Sinhala 🇱🇰 | English | Mobile Friendly
+  <p id="fileStatus" role="status" aria-live="polite"></p>
+  <div class="notice" id="fileNotice">
+    File saving is handled by your browser. Large files
+    may require enough free storage on your phone.
   </div>
 </section>
 
+<section class="panel">
+  <h2 id="featuresTitle">Made for your phone</h2>
+  <div class="features">
+    <div class="feature">
+      <strong>📱 <span id="f1">Mobile first</span></strong>
+      <small id="f1d">Designed for Android screens.</small>
+    </div>
+    <div class="feature">
+      <strong>🛡️ <span id="f2">Safer media</span></strong>
+      <small id="f2d">Use media you have permission to save.</small>
+    </div>
+    <div class="feature">
+      <strong>🌐 <span id="f3">Two platforms</span></strong>
+      <small id="f3d">YouTube and TikTok link support.</small>
+    </div>
+    <div class="feature">
+      <strong>🌍 <span id="f4">Two languages</span></strong>
+      <small id="f4d">Switch between English and Sinhala.</small>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2 id="accountTitle">My Account</h2>
+  <p id="accountIntro">
+    Secure Google sign-in will be added after backend setup.
+  </p>
+  <div class="notice" id="accountNotice">
+    Never enter your Google password directly on this demo page.
+  </div>
+</section>
 </main>
 
-<footer>
-  © Nishflix LK · Media you have permission to use
-</footer>
+<footer>© Nishflix LK · <span id="footerText">Smart Media Center</span></footer>
 
 <script>
 let selectedPlatform = "youtube";
+let sinhala = false;
 
-const urlInput = document.getElementById("mediaUrl");
-const status = document.getElementById("status");
+const $ = id => document.getElementById(id);
+const urlInput = $("mediaUrl");
+const status = $("status");
 
 document.querySelectorAll(".platform").forEach(btn => {
   btn.addEventListener("click", () => {
     selectedPlatform = btn.dataset.platform;
-
     document.querySelectorAll(".platform").forEach(item => {
       item.classList.toggle("active", item === btn);
     });
-
-    urlInput.placeholder =
-      selectedPlatform === "youtube"
+    urlInput.placeholder = selectedPlatform === "youtube"
       ? "https://www.youtube.com/watch?v=..."
       : "https://www.tiktok.com/@user/video/...";
-
     status.textContent = "";
   });
 });
 
 function detectPlatform(url) {
   const host = url.hostname.toLowerCase();
-
-  if (host === "youtube.com" ||
-      host.endsWith(".youtube.com") ||
-      host === "youtu.be") {
-    return "youtube";
-  }
-
-  if (host === "tiktok.com" ||
-      host.endsWith(".tiktok.com")) {
+  if (host === "youtube.com" || host.endsWith(".youtube.com") ||
+      host === "youtu.be") return "youtube";
+  if (host === "tiktok.com" || host.endsWith(".tiktok.com"))
     return "tiktok";
-  }
-
   return null;
 }
 
-document.getElementById("mediaForm")
-.addEventListener("submit", event => {
+$("mediaForm").addEventListener("submit", event => {
   event.preventDefault();
-
   let url;
-
   try {
     url = new URL(urlInput.value.trim());
   } catch {
-    status.textContent = "Please enter a valid link.";
+    status.textContent = sinhala
+      ? "නිවැරදි link එකක් ඇතුළත් කරන්න."
+      : "Please enter a valid link.";
     return;
   }
 
-  if (!["https:", "http:"].includes(url.protocol)) {
-    status.textContent = "Unsupported link.";
+  if (url.protocol !== "https:" && url.protocol !== "http:") {
+    status.textContent = "Only HTTP/HTTPS links are supported.";
     return;
   }
 
   const platform = detectPlatform(url);
-
   if (!platform) {
-    status.textContent =
-      "Enter a YouTube or TikTok link.";
+    status.textContent = sinhala
+      ? "YouTube හෝ TikTok link එකක් ඇතුළත් කරන්න."
+      : "Enter a YouTube or TikTok link.";
     return;
   }
 
   if (platform !== selectedPlatform) {
-    status.textContent =
-      "Please select the matching platform.";
+    status.textContent = sinhala
+      ? "ඉහළින් නිවැරදි platform එක තෝරන්න."
+      : "Choose the matching platform above.";
     return;
   }
 
-  status.textContent =
-    "Link checked. Opening " + platform + "...";
+  status.textContent = sinhala
+    ? "Link එක පරීක්ෂා කළා. Platform එක විවෘත කරනවා."
+    : "Link checked. Opening the platform. This page does not extract media.";
 
   window.open(url.href, "_blank", "noopener,noreferrer");
 });
 
-document.getElementById("saveFile")
-.addEventListener("click", () => {
-  const file = document.getElementById("localFile").files[0];
-  const output = document.getElementById("fileStatus");
-
+$("saveFile").addEventListener("click", () => {
+  const file = $("localFile").files[0];
   if (!file) {
-    output.textContent = "Please choose a file first.";
+    $("fileStatus").textContent = sinhala
+      ? "මුලින් file එකක් තෝරන්න."
+      : "Please select a file first.";
     return;
   }
 
   const objectUrl = URL.createObjectURL(file);
   const link = document.createElement("a");
-
   link.href = objectUrl;
   link.download = file.name;
   document.body.appendChild(link);
   link.click();
   link.remove();
-
   setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
+  $("fileStatus").textContent = sinhala
+    ? "Save request එක යැව්වා. Downloads folder එක බලන්න."
+    : "Save requested. Check your Downloads folder.";
+});
 
-  output.textContent = "Save requested. Check Downloads.";
+$("langBtn").addEventListener("click", () => {
+  sinhala = !sinhala;
+  $("langBtn").textContent = sinhala ? "English" : "සිංහල";
+  document.documentElement.lang = sinhala ? "si" : "en";
+
+  const text = sinhala ? {
+    eyebrow:"ඔබේ මාධ්‍ය. ඔබේ තේරීම.",
+    welcome:"Nishflix LK වෙත සාදරයෙන් පිළිගනිමු",
+    intro:"ඔබේ මාධ්‍ය එකම තැනකින් කළමනාකරණය කරන්න.",
+    mediaTitle:"මාධ්‍ය මධ්‍යස්ථානය",
+    mediaIntro:"Platform එක තෝරා link එක ඇතුළත් කරන්න.",
+    urlLabel:"Media Link එක",
+    formatLabel:"Format එක",
+    qualityLabel:"Quality එක",
+    continueBtn:"Link එක පරීක්ෂා කරන්න",
+    myMediaTitle:"මගේ Media",
+    myMediaIntro:"ඔබට අයිති media file එකක් save කරන්න.",
+    fileLabel:"Audio හෝ video file එකක් තෝරන්න",
+    saveFile:"තෝරාගත් file එක Save කරන්න",
+    fileNotice:"Browser එක හරහා file එක save වේ. Phone එකේ ඉඩ තිබිය යුතුයි.",
+    featuresTitle:"ඔබේ Phone එකටම",
+    f1:"Mobile පහසුකම", f1d:"Android සඳහා නිර්මාණය කර ඇත.",
+    f2:"ආරක්ෂිත Media", f2d:"අවසර ඇති media පමණක් save කරන්න.",
+    f3:"Platform දෙකක්", f3d:"YouTube සහ TikTok link support.",
+    f4:"භාෂා දෙකක්", f4d:"සිංහල සහ English අතර මාරු වන්න.",
+    accountTitle:"මගේ ගිණුම",
+    accountIntro:"Backend එක සකස් කළ පසු Google sign-in එක එකතු කරමු.",
+    accountNotice:"මෙම demo පිටුවේ Google password එක ඇතුළත් කරන්න එපා.",
+    footerText:"ස්මාර්ට් මාධ්‍ය මධ්‍යස්ථානය"
+  } : {
+    eyebrow:"YOUR MEDIA. YOUR WAY.",
+    welcome:"Welcome to Nishflix LK",
+    intro:"Discover and manage your media in one place.",
+    mediaTitle:"Media Center",
+    mediaIntro:"Choose a platform and enter its link.",
+    urlLabel:"Media URL",
+    formatLabel:"Preferred format",
+    qualityLabel:"Preferred quality",
+    continueBtn:"Check link",
+    myMediaTitle:"My Media",
+    myMediaIntro:"Save a copy of a file you own.",
+    fileLabel:"Choose an audio or video file",
+    saveFile:"Save selected file",
+    fileNotice:"File saving is handled by your browser. Large files need free phone storage.",
+    featuresTitle:"Made for your phone",
+    f1:"Mobile first", f1d:"Designed for Android screens.",
+    f2:"Safer media", f2d:"Use media you have permission to save.",
+    f3:"Two platforms", f3d:"YouTube and TikTok link support.",
+    f4:"Two languages", f4d:"Switch between English and Sinhala.",
+    accountTitle:"My Account",
+    accountIntro:"Secure Google sign-in will be added after backend setup.",
+    accountNotice:"Never enter your Google password directly on this demo page.",
+    footerText:"Smart Media Center"
+  };
+
+  Object.keys(text).forEach(id => $(id).textContent = text[id]);
 });
 </script>
-
 </body>
 </html>
