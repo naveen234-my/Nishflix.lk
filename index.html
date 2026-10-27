@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0d14">
+<title>Nishflix LK | Media Center</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #0b0d14;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid #303546;
+}
+
+.logo {
+  background: #e11d48;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 22px;
+}
+
+header h2 { margin: 0; }
+header small { color: #a6adbd; }
+
+main {
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 15px;
+}
+
+.panel {
+  background: #171b27;
+  border: 1px solid #303546;
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+h1 { font-size: 34px; }
+p { color: #a6adbd; line-height: 1.6; }
+
+.platforms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.platform {
+  background: #252a38;
+  color: white;
+  border: 1px solid #41485b;
+  border-radius: 12px;
+  padding: 18px 8px;
+  font-size: 16px;
+}
+
+.platform.active {
+  background: #49202f;
+  border-color: #fb7185;
+}
+
+.platform span {
+  display: block;
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0 16px;
+  background: #0f121c;
+  color: white;
+  border: 1px solid #41485b;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+label { display: block; }
+
+.primary {
+  width: 100%;
+  padding: 15px;
+  background: #e11d48;
+  color: white;
+  border: 0;
+  border-radius: 11px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.notice {
+  padding: 12px;
+  background: #252a38;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #c5cada;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #a6adbd;
+  font-size: 12px;
+}
+
+#status, #fileStatus {
+  overflow-wrap: anywhere;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">▶</div>
+  <div>
+    <h2>NISHFLIX LK</h2>
+    <small>SMART MEDIA CENTER</small>
+  </div>
+</header>
+
+<main>
+
+<section class="panel">
+  <p style="color:#fb7185;letter-spacing:2px">
+    YOUR MEDIA. YOUR WAY.
+  </p>
+  <h1>Welcome to Nishflix LK</h1>
+  <p>Your media, all in one place.</p>
+
+  <div class="platforms">
+    <button class="platform active"
+      data-platform="youtube">
+      <span>▶️</span>YouTube
+    </button>
+
+    <button class="platform"
+      data-platform="tiktok">
+      <span>♪</span>TikTok
+    </button>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Media Downloader</h2>
+  <p>Enter a link to continue.</p>
+
+  <form id="mediaForm">
+    <label for="mediaUrl">Media URL</label>
+    <input id="mediaUrl" type="url"
+      placeholder="Paste YouTube or TikTok link"
+      required>
+
+    <label for="format">Download format</label>
+    <select id="format">
+      <option value="mp4">MP4 Video</option>
+      <option value="mp3">MP3 Audio</option>
+    </select>
+
+    <label for="quality">Video quality</label>
+    <select id="quality">
+      <option value="best">Best available</option>
+      <option value="360p">360p</option>
+      <option value="480p">480p</option>
+      <option value="720p">720p HD</option>
+      <option value="1080p">1080p Full HD</option>
+      <option value="audio">Audio only</option>
+    </select>
+
+    <button class="primary" type="submit">
+      Continue
+    </button>
+  </form>
+
+  <p id="status" role="status"></p>
+
+  <div class="notice">
+    This is the initial dashboard version.
+    It checks supported links and opens the relevant
+    platform. Actual media extraction requires a
+    separate backend and appropriate permission.
+  </div>
+</section>
+
+<section class="panel">
+  <h2>My Media</h2>
+  <p>Save a copy of a media file you own.</p>
+
+  <label for="localFile">Choose audio or video</label>
+  <input id="localFile" type="file"
+    accept="audio/*,video/*">
+
+  <button class="primary" id="saveFile" type="button">
+    Save selected file
+  </button>
+
+  <p id="fileStatus" role="status"></p>
+</section>
+
+<section class="panel">
+  <h2>My Account</h2>
+  <p>
+    Google sign-in and download history will be
+    added after secure backend setup.
+  </p>
+  <div class="notice">
+    Sinhala 🇱🇰 | English | Mobile Friendly
+  </div>
+</section>
+
+</main>
+
+<footer>
+  © Nishflix LK · Media you have permission to use
+</footer>
+
+<script>
+let selectedPlatform = "youtube";
+
+const urlInput = document.getElementById("mediaUrl");
+const status = document.getElementById("status");
+
+document.querySelectorAll(".platform").forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedPlatform = btn.dataset.platform;
+
+    document.querySelectorAll(".platform").forEach(item => {
+      item.classList.toggle("active", item === btn);
+    });
+
+    urlInput.placeholder =
+      selectedPlatform === "youtube"
+      ? "https://www.youtube.com/watch?v=..."
+      : "https://www.tiktok.com/@user/video/...";
+
+    status.textContent = "";
+  });
+});
+
+function detectPlatform(url) {
+  const host = url.hostname.toLowerCase();
+
+  if (host === "youtube.com" ||
+      host.endsWith(".youtube.com") ||
+      host === "youtu.be") {
+    return "youtube";
+  }
+
+  if (host === "tiktok.com" ||
+      host.endsWith(".tiktok.com")) {
+    return "tiktok";
+  }
+
+  return null;
+}
+
+document.getElementById("mediaForm")
+.addEventListener("submit", event => {
+  event.preventDefault();
+
+  let url;
+
+  try {
+    url = new URL(urlInput.value.trim());
+  } catch {
+    status.textContent = "Please enter a valid link.";
+    return;
+  }
+
+  if (!["https:", "http:"].includes(url.protocol)) {
+    status.textContent = "Unsupported link.";
+    return;
+  }
+
+  const platform = detectPlatform(url);
+
+  if (!platform) {
+    status.textContent =
+      "Enter a YouTube or TikTok link.";
+    return;
+  }
+
+  if (platform !== selectedPlatform) {
+    status.textContent =
+      "Please select the matching platform.";
+    return;
+  }
+
+  status.textContent =
+    "Link checked. Opening " + platform + "...";
+
+  window.open(url.href, "_blank", "noopener,noreferrer");
+});
+
+document.getElementById("saveFile")
+.addEventListener("click", () => {
+  const file = document.getElementById("localFile").files[0];
+  const output = document.getElementById("fileStatus");
+
+  if (!file) {
+    output.textContent = "Please choose a file first.";
+    return;
+  }
+
+  const objectUrl = URL.createObjectURL(file);
+  const link = document.createElement("a");
+
+  link.href = objectUrl;
+  link.download = file.name;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
+
+  output.textContent = "Save requested. Check Downloads.";
+});
+</script>
+
+</body>
+</html>
