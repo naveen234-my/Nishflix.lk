@@ -1,85 +1,121 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0b0e">
-<title>Nishflix LK | Media Hub</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101020">
+<meta name="description" content="NISHFLIX LK — manage your media and authorized downloads.">
+<title>NISHFLIX LK | Media Studio</title>
 <style>
 :root {
-  --bg: #0b0b0e;
-  --panel: #151519;
-  --red: #ff3048;
-  --muted: #a5a5b0;
-  --white: #f8f8fb;
+  color-scheme:dark;
+  --bg:#0b0b16;--panel:#17172a;--muted:#a8acc7;
+  --text:#fafaff;--line:#30304b;--pink:#ff438d;
+  --purple:#8158ff;--cyan:#39d9ed;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0; background: var(--bg); color: var(--white);
-  font-family: system-ui, Arial, sans-serif;
+*{box-sizing:border-box}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at 15% 0%,#30204d 0,transparent 36%),
+  radial-gradient(ellipse at 95% 25%,#182e4b 0,transparent 32%),
+  var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Arial,sans-serif;
 }
-header {
-  padding: 20px; display: flex; align-items: center;
-  justify-content: space-between; border-bottom: 1px solid #29292f;
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:17px max(16px,calc((100% - 1000px)/2));
+  border-bottom:1px solid var(--line);
+  background:#0b0b16d9;position:sticky;top:0;z-index:5;
+  backdrop-filter:blur(14px)
 }
-.logo { font-size: 22px; font-weight: 900; letter-spacing: -.7px; }
-.logo span { color: var(--red); }
-select, input, button {
-  font: inherit; border-radius: 10px; padding: 12px;
+.logo{font-weight:950;letter-spacing:-1px;font-size:21px}
+.logo span{color:var(--pink)}
+select,input,button{font:inherit;border-radius:12px}
+select,input{
+  background:#111124;color:white;border:1px solid #3b3b59;
+  padding:12px;width:100%;min-width:0
 }
-select, input {
-  background: #202025; color: white; border: 1px solid #38383f;
-  width: 100%;
+button{cursor:pointer;border:0;font-weight:750;padding:12px}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--cyan);outline-offset:3px
 }
-main { max-width: 900px; margin: auto; padding: 22px 16px 45px; }
-.hero {
-  padding: 30px 20px; border-radius: 20px;
-  background: linear-gradient(135deg,#351018,#17151c 65%,#101015);
-  border: 1px solid #54202a; margin-bottom: 22px;
+main{max-width:1000px;margin:auto;padding:24px 16px 45px}
+.hero{
+  position:relative;overflow:hidden;padding:30px 22px;
+  border:1px solid #574184;border-radius:24px;
+  background:linear-gradient(120deg,#47206b,#20234d 52%,#124c60);
+  margin-bottom:23px;animation:appear .65s ease both
 }
-.tag {
-  color: #ff8492; font-size: 12px; font-weight: 800;
-  letter-spacing: 2px;
+.hero:after{
+  content:"✦";position:absolute;right:23px;top:15px;
+  font-size:100px;color:#ffffff15;animation:float 4s ease-in-out infinite
 }
-h1 { font-size: clamp(28px,7vw,44px); line-height: 1.12; margin: 12px 0; }
-p { color: var(--muted); line-height: 1.6; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
-.card {
-  background: var(--panel); border: 1px solid #2c2c33;
-  border-radius: 16px; padding: 17px;
+.tag{font-size:11px;letter-spacing:3px;font-weight:850;color:#bcefff}
+h1{font-size:clamp(32px,7vw,52px);line-height:1.08;
+  margin:14px 0;letter-spacing:-1.5px}
+h1 span{background:linear-gradient(90deg,#ff8bc0,#c5a6ff,#70f1ff);
+  background-clip:text;color:transparent}
+p{color:var(--muted);line-height:1.6}
+.hero p{max-width:520px}
+.pill{
+  display:inline-block;border:1px solid #ffffff35;
+  border-radius:99px;padding:7px 11px;font-size:11px;color:#fff
 }
-.symbol { font-size: 26px; }
-.card h2 { font-size: 17px; margin: 8px 0; }
-.card p { font-size: 13px; margin-bottom: 0; }
-.section-title { margin: 28px 0 13px; font-size: 20px; }
-.field { margin: 14px 0; }
-label { display: block; font-size: 13px; color: #d8d8df; margin-bottom: 8px; }
-.options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-button {
-  border: 0; cursor: pointer; font-weight: 750;
+.section-title{font-size:21px;margin:28px 0 13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.card{
+  background:linear-gradient(145deg,#1b1b30,#131322);
+  border:1px solid var(--line);border-radius:19px;padding:18px;
+  min-width:0;transition:transform .2s,border-color .2s
 }
-.primary {
-  width: 100%; background: var(--red); color: white;
-  margin-top: 8px; padding: 14px;
+.card:hover{transform:translateY(-3px);border-color:#7162b5}
+.social-icon{
+  width:49px;height:49px;display:grid;place-items:center;
+  border-radius:15px;font-size:25px;margin-bottom:12px;
+  background:#29233f
 }
-.secondary { background: #292930; color: white; }
-.notice {
-  border: 1px solid #393941; border-radius: 12px;
-  padding: 13px; font-size: 12px; color: var(--muted);
-  margin-top: 17px;
+.yt{background:#491c30}.tt{background:#19383f}
+.ig{background:#462342}.files{background:#193b4b}
+.card h2{font-size:17px;margin:0 0 7px}
+.card p{font-size:13px;margin:0 0 15px}
+.action,.primary,.google{
+  width:100%;color:white;background:linear-gradient(100deg,var(--purple),var(--pink))
 }
-footer { text-align: center; color: #777783; padding: 20px; font-size: 12px; }
-@media(max-width:440px) {
-  .grid { grid-template-columns: 1fr; }
-  header { padding: 16px; }
+.secondary{background:#292941;color:white}
+button:active{transform:scale(.98)}
+.field{margin:14px 0}
+label{display:block;font-size:13px;color:#e0e0f3;margin-bottom:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.notice{
+  background:#111123;border:1px solid #373752;border-radius:12px;
+  padding:13px;font-size:12px;color:#c1c4dd;
+  margin-top:15px;overflow-wrap:anywhere
+}
+.notice a{color:#80eaff}
+.profile{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.avatar{
+  width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;font-size:22px;
+  background:linear-gradient(135deg,var(--purple),var(--pink))
+}
+.small{font-size:12px;color:var(--muted)}
+footer{text-align:center;padding:25px;color:#888aa7;font-size:12px}
+a{color:#8fe8ff}
+@keyframes float{50%{transform:translateY(-9px) rotate(8deg)}}
+@keyframes appear{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@media(min-width:650px){.social-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:420px){header{padding:13px}.logo{font-size:18px}
+  main{padding:17px 12px 32px}.hero{padding:25px 17px}
+  .card{padding:14px}.two{gap:8px}}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 <body>
 <header>
   <div class="logo">NISHFLIX <span>LK</span></div>
-  <select id="language" aria-label="Language" style="width:112px">
+  <select id="language" aria-label="Language" style="width:118px">
     <option value="en">English</option>
     <option value="si">සිංහල</option>
   </select>
@@ -87,139 +123,328 @@ footer { text-align: center; color: #777783; padding: 20px; font-size: 12px; }
 
 <main>
   <section class="hero">
-    <div class="tag">YOUR MEDIA HUB</div>
-    <h1 data-en="Your media.<br>Your choice." data-si="ඔබේ මාධ්‍ය.<br>ඔබේ තේරීම.">Your media.<br>Your choice.</h1>
-    <p data-en="A simple place to manage media links and your own files."
-       data-si="මාධ්‍ය සබැඳි සහ ඔබේම ගොනු කළමනාකරණයට සරල තැනක්.">
-       A simple place to manage media links and your own files.
+    <div class="tag" data-en="YOUR MEDIA WORKSPACE"
+         data-si="ඔබේ මාධ්‍ය අවකාශය">YOUR MEDIA WORKSPACE</div>
+    <h1 data-en="Your media.<br><span>Your choice.</span>"
+        data-si="ඔබේ මාධ්‍ය.<br><span>ඔබේ තේරීම.</span>">
+      Your media.<br><span>Your choice.</span>
+    </h1>
+    <p data-en="One colorful place for your own files, authorized downloads and media tools."
+       data-si="ඔබේම ගොනු, අවසර ඇති downloads සහ මාධ්‍ය මෙවලම් සඳහා එකම තැනක්.">
+       One colorful place for your own files, authorized downloads and media tools.
     </p>
+    <span class="pill">✦ CREATE · MANAGE · SAVE</span>
   </section>
 
-  <div class="grid">
+  <h2 class="section-title" data-en="Explore platforms"
+      data-si="Platform තෝරන්න">Explore platforms</h2>
+  <section class="grid social-grid">
     <article class="card">
-      <div class="symbol">▶️</div>
-      <h2>YouTube</h2>
-      <p data-en="Open videos and manage links you are allowed to use."
-         data-si="ඔබට භාවිත කිරීමට අවසර ඇති වීඩියෝ සහ සබැඳි කළමනාකරණය කරන්න.">
-        Open videos and manage links you are allowed to use.
-      </p>
-      <button class="secondary" style="margin-top:14px"
-        onclick="openPlatform('youtube')">Open YouTube</button>
+      <div class="social-icon yt">▶</div><h2>YouTube</h2>
+      <p data-en="Open videos and use permitted download options."
+         data-si="වීඩියෝ විවෘත කර අවසර ඇති download ක්‍රම භාවිත කරන්න.">
+         Open videos and use permitted download options.</p>
+      <button class="secondary action" onclick="openPlatform('youtube')">Open YouTube ↗</button>
     </article>
     <article class="card">
-      <div class="symbol">♪</div>
-      <h2>TikTok</h2>
-      <p data-en="Open TikTok and access links to your permitted media."
-         data-si="TikTok විවෘත කර අවසර ඇති මාධ්‍ය සබැඳි භාවිත කරන්න.">
-        Open TikTok and access links to your permitted media.
-      </p>
-      <button class="secondary" style="margin-top:14px"
-        onclick="openPlatform('tiktok')">Open TikTok</button>
+      <div class="social-icon tt">♫</div><h2>TikTok</h2>
+      <p data-en="View TikTok and access your own media."
+         data-si="TikTok විවෘත කර ඔබේම මාධ්‍ය වෙත පිවිසෙන්න.">
+         View TikTok and access your own media.</p>
+      <button class="secondary action" onclick="openPlatform('tiktok')">Open TikTok ↗</button>
     </article>
-  </div>
+    <article class="card">
+      <div class="social-icon ig">◎</div><h2>Instagram</h2>
+      <p data-en="Open Instagram and manage your own content."
+         data-si="Instagram විවෘත කර ඔබේම අන්තර්ගත කළමනාකරණය කරන්න.">
+         Open Instagram and manage your own content.</p>
+      <button class="secondary action" onclick="openPlatform('instagram')">Open Instagram ↗</button>
+    </article>
+    <article class="card">
+      <div class="social-icon files">▤</div><h2 data-en="My Files" data-si="මගේ ගොනු">My Files</h2>
+      <p data-en="Choose an audio, video or image file on your device."
+         data-si="ඔබේ දුරකථනයෙන් audio, video හෝ image file එකක් තෝරන්න.">
+         Choose an audio, video or image file on your device.</p>
+      <button class="secondary action" onclick="document.getElementById('localFile').click()"
+        data-en="Choose a file" data-si="ගොනුවක් තෝරන්න">Choose a file</button>
+    </article>
+  </section>
 
-  <h2 class="section-title" data-en="Media tools" data-si="මාධ්‍ය මෙවලම්">Media tools</h2>
+  <h2 class="section-title" data-en="Media workspace" data-si="මාධ්‍ය මෙවලම්">Media workspace</h2>
   <section class="card">
     <div class="field">
-      <label for="mediaUrl" data-en="Media URL" data-si="මාධ්‍ය සබැඳිය">Media URL</label>
-      <input id="mediaUrl" type="url" placeholder="https://example.com/my-video.mp4">
+      <label for="mediaUrl" data-en="Direct media URL" data-si="සෘජු මාධ්‍ය සබැඳිය">Direct media URL</label>
+      <input id="mediaUrl" type="url" inputmode="url"
+        placeholder="https://example.com/my-video.mp4" autocomplete="url">
     </div>
-    <div class="options">
+    <div class="two">
       <div class="field">
-        <label for="format" data-en="Format" data-si="ආකෘතිය">Format</label>
+        <label for="format" data-en="Desired format" data-si="අවශ්‍ය ආකෘතිය">Desired format</label>
         <select id="format">
-          <option value="mp4">MP4 video</option>
-          <option value="mp3">MP3 audio</option>
+          <option value="original">Original file</option>
+          <option value="mp4">MP4 video (existing file)</option>
+          <option value="mp3">MP3 audio (existing file)</option>
+          <option value="image">Image</option>
         </select>
       </div>
       <div class="field">
         <label for="quality" data-en="Quality" data-si="ගුණාත්මකභාවය">Quality</label>
         <select id="quality">
           <option value="original">Original</option>
-          <option value="720">720p (if available)</option>
-          <option value="480">480p (if available)</option>
+          <option value="720">720p if available</option>
+          <option value="480">480p if available</option>
         </select>
       </div>
     </div>
-    <button class="primary" onclick="handleMedia()">Continue</button>
-    <div id="status" class="notice" role="status">
-      Paste a direct media link that you own or have permission to download.
+    <button class="primary" onclick="handleMedia()"
+      data-en="Continue →" data-si="ඉදිරියට →">Continue →</button>
+    <div id="status" class="notice" role="status" aria-live="polite">
+      Enter a direct URL to a file you own or are authorized to download.
     </div>
-    <div class="field" style="margin-top:18px">
-      <label for="localFile">Choose your own media file</label>
-      <input id="localFile" type="file" accept="audio/*,video/*">
+    <div class="field" style="margin-top:20px">
+      <label for="localFile" data-en="Select a file from your phone"
+        data-si="දුරකථනයෙන් ගොනුවක් තෝරන්න">Select a file from your phone</label>
+      <input id="localFile" type="file" accept="image/*,audio/*,video/*">
     </div>
-    <button class="secondary" onclick="saveLocalFile()">Save selected file</button>
+    <button class="secondary action" onclick="saveLocalFile()"
+      data-en="Save selected file" data-si="තෝරාගත් ගොනුව සුරකින්න">Save selected file</button>
+    <p class="small" data-en="MP3 conversion and video quality changes require a compatible processing service."
+       data-si="MP3 conversion සහ video quality වෙනස් කිරීමට ගැළපෙන processing සේවාවක් අවශ්‍යයි.">
+       MP3 conversion and video quality changes require a compatible processing service.
+    </p>
   </section>
 
-  <div class="notice">
-    This interface does not extract media from YouTube or TikTok links. Direct downloads depend on the source allowing them. Only download or convert media you own or have permission to use.
+  <h2 class="section-title" data-en="Your account" data-si="ඔබේ ගිණුම">Your account</h2>
+  <section class="card">
+    <div class="profile">
+      <div class="avatar">👤</div>
+      <div>
+        <strong data-en="Welcome to NISHFLIX LK"
+          data-si="NISHFLIX LK වෙත සාදරයෙන් පිළිගනිමු">Welcome to NISHFLIX LK</strong>
+        <div class="small" data-en="Authentication setup required"
+          data-si="ගිණුම් පද්ධතිය සම්බන්ධ කළ යුතුයි">Authentication setup required</div>
+      </div>
+    </div>
+    <p data-en="Google sign-in and verified email accounts will be enabled after Firebase is configured."
+       data-si="Firebase සකස් කළ පසු Google sign-in සහ email verification සක්‍රිය කළ හැකියි.">
+       Google sign-in and verified email accounts will be enabled after Firebase is configured.
+    </p>
+    <button class="google" onclick="nishflixGoogleSignIn()"
+      data-en="Continue with Google" data-si="Google සමඟ ඉදිරියට">Continue with Google</button>
+
+<div style="margin-top:10px">
+  <input id="authEmail" type="email"
+    placeholder="Email address" autocomplete="email"
+    style="width:100%;padding:12px;margin-bottom:8px">
+
+  <input id="authPassword" type="password"
+    placeholder="Password" autocomplete="current-password"
+    style="width:100%;padding:12px">
+</div>
+
+    <div class="two" style="margin-top:10px">
+      <button class="secondary" onclick="nishflixCreateAccount(document.getElementById('authEmail').value,document.getElementById('authPassword').value)"
+        data-en="Create account" data-si="ගිණුමක් සාදන්න">Create account</button>
+      <button class="secondary" onclick="nishflixEmailSignIn(document.getElementById('authEmail').value,document.getElementById('authPassword').value)"
+        data-en="Sign in" data-si="ඇතුළු වන්න">Sign in</button>
+    </div>
+    <div class="notice" id="accountStatus" role="status" aria-live="polite">
+      Authentication is not connected yet. These buttons do not sign you in until Firebase is configured.
+    </div>
+  </section>
+
+  <div class="notice" data-en="Use only media you own or have permission to download. This site does not extract media from platform links or bypass access restrictions. Remote downloads depend on the source server."
+       data-si="ඔබ සතු හෝ download කිරීමට අවසර ඇති මාධ්‍ය පමණක් භාවිත කරන්න. මෙම වෙබ් අඩවිය platform links වලින් media extract කිරීම හෝ ප්‍රවේශ සීමා මඟහැරීම සිදු නොකරයි.">
+    Use only media you own or have permission to download. This site does not extract media from platform links or bypass access restrictions. Remote downloads depend on the source server.
   </div>
 </main>
-<footer>© 2026 Nishflix LK · Media Hub</footer>
+
+<footer>© 2026 NISHFLIX LK · Media Studio</footer>
 
 <script>
-function openPlatform(platform) {
-  const urls = {
-    youtube: "https://www.youtube.com/",
-    tiktok: "https://www.tiktok.com/"
-  };
-  window.open(urls[platform], "_blank", "noopener");
+const translations = {
+  en: {
+    invalid:"Please enter a valid HTTP or HTTPS URL.",
+    platform:"This is a platform page, not a direct media file. Open the platform or use an authorized download option.",
+    unsupported:"This option cannot convert or change quality without a compatible media-processing service.",
+    direct:"Open this direct file link. The source server controls whether it can be downloaded.",
+    choose:"Please select a file first.",
+    local:"Your selected file is ready to save.",
+    account:"Google sign-in and account creation are not connected yet. Firebase setup is required."
+  },
+  si: {
+    invalid:"වලංගු HTTP හෝ HTTPS සබැඳියක් ඇතුළත් කරන්න.",
+    platform:"මෙය සෘජු මාධ්‍ය ගොනුවක් නොවේ. Platform එක විවෘත කරන්න හෝ අවසර ඇති download ක්‍රමයක් භාවිත කරන්න.",
+    unsupported:"Media-processing සේවාවක් නොමැතිව මෙම format හෝ quality වෙනස් කළ නොහැක.",
+    direct:"මෙම සෘජු file link එක විවෘත කරන්න. Download කළ හැකිද යන්න source server එක මත රඳා පවතී.",
+    choose:"මුලින් ගොනුවක් තෝරන්න.",
+    local:"තෝරාගත් ගොනුව සුරැකීමට සූදානම්.",
+    account:"Google sign-in සහ account creation තවම සම්බන්ධ කර නැත. Firebase සැකසුම අවශ්‍යයි."
+  }
+};
+
+function currentLang(){
+  return document.getElementById("language").value;
 }
-function handleMedia() {
-  const input = document.getElementById("mediaUrl");
+function msg(key){
+  return translations[currentLang()][key];
+}
+function openPlatform(platform){
+  const urls = {
+    youtube:"https://www.youtube.com/",
+    tiktok:"https://www.tiktok.com/",
+    instagram:"https://www.instagram.com/"
+  };
+  if(urls[platform]) window.open(urls[platform],"_blank","noopener,noreferrer");
+}
+function handleMedia(){
   const status = document.getElementById("status");
   let url;
-  try { url = new URL(input.value); }
-  catch {
-    status.textContent = "Please enter a valid media URL.";
+
+  try {
+    url = new URL(document.getElementById("mediaUrl").value.trim());
+    if (!["http:", "https:"].includes(url.protocol)) throw Error();
+  } catch {
+    status.textContent = msg("invalid");
     return;
   }
-  if (!["http:", "https:"].includes(url.protocol)) {
-    status.textContent = "Only HTTP and HTTPS links are supported.";
+
+  const host = url.hostname.toLowerCase();
+  const isYouTube =
+    host === "youtube.com" ||
+    host.endsWith(".youtube.com") ||
+    host === "youtu.be";
+
+  const isTikTok =
+    host === "tiktok.com" ||
+    host.endsWith(".tiktok.com");
+
+  if (isYouTube || isTikTok) {
+    status.replaceChildren();
+
+    const message = document.createElement("p");
+    message.textContent = isYouTube
+      ? "YouTube: use the official download options available for this content."
+      : "TikTok: use Save video when the creator permits downloads.";
+    status.append(message);
+
+    const link = document.createElement("a");
+    link.href = url.href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Open source platform";
+    status.append(link);
     return;
   }
-  if (url.hostname === "youtube.com" ||
-      url.hostname.endsWith(".youtube.com") ||
-      url.hostname === "youtu.be" ||
-      url.hostname === "tiktok.com" ||
-      url.hostname.endsWith(".tiktok.com")) {
-    status.textContent = "Open the source platform to view this link. This page cannot extract media from platform links.";
+
+  const format = document.getElementById("format").value;
+  const path = url.pathname.toLowerCase();
+  const looksLikeFile =
+    /\.(mp4|mp3|m4a|webm|mov|wav|ogg)$/i.test(path);
+
+  if (format !== "original" && !looksLikeFile) {
+    status.textContent = msg("unsupported");
     return;
   }
+
+  status.replaceChildren();
+  status.append(document.createTextNode(msg("direct") + " "));
+
   const link = document.createElement("a");
   link.href = url.href;
-  link.download = "";
-  link.rel = "noopener";
-  link.textContent = "Open permitted media link";
-  status.replaceChildren("Direct download depends on the server. ", link);
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Open media file";
+  status.append(link);
 }
-function saveLocalFile() {
-  const fileInput = document.getElementById("localFile");
-  const file = fileInput.files[0];
+
+async function saveLocalFile(){
+  const file = document.getElementById("localFile").files[0];
   const status = document.getElementById("status");
+  const format = document.getElementById("format").value;
+  const quality = document.getElementById("quality").value;
+
   if (!file) {
-    status.textContent = "Please choose a file first.";
+    status.textContent = msg("choose");
     return;
   }
-  const url = URL.createObjectURL(file);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = file.name;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  status.textContent = "Your selected file was prepared for saving.";
+
+  if (format === "image" || file.type.startsWith("image/")) {
+    status.textContent =
+      "Image processing is not supported by the current backend.";
+    return;
+  }
+
+  if (file.size > 50 * 1024 * 1024) {
+    status.textContent = "Maximum file size is 50 MB.";
+    return;
+  }
+
+  const mode = format === "mp3"
+    ? "audio"
+    : file.type.startsWith("audio/")
+      ? "audio"
+      : "video";
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("mode", mode);
+  formData.append("quality", quality);
+
+  // Local testing only. Use your HTTPS cloud API URL after deployment.
+  const API_BASE = "http://127.0.0.1:8000";
+
+  status.textContent = "Uploading and processing...";
+
+  try {
+    const response = await fetch(`${API_BASE}/process`, {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.detail || "Processing failed.");
+    }
+
+    const downloadUrl = new URL(
+      result.download_url,
+      API_BASE
+    ).href;
+
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = result.filename || "nishflix-media";
+    link.textContent = "Download processed file";
+    link.rel = "noopener noreferrer";
+
+    status.replaceChildren(
+      document.createTextNode("Processing complete! "),
+      link
+    );
+  } catch (error) {
+    status.textContent =
+      "Could not connect to the backend. Check that the server is running. " +
+      error.message;
+  }
 }
-document.getElementById("language").addEventListener("change", function() {
-  const lang = this.value;
-  document.documentElement.lang = lang;
-  document.querySelectorAll("[data-en]").forEach(el => {
-    el.innerHTML = el.dataset[lang];
+;
+}
+function accountSetup(){
+  document.getElementById("accountStatus").textContent=msg("account");
+}
+document.getElementById("language").addEventListener("change",function(){
+  const lang=this.value;
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-en][data-si]").forEach(el=>{
+    el.innerHTML=el.dataset[lang];
   });
-  document.querySelectorAll("button").forEach(btn => {
-    if (btn.dataset.en) btn.textContent = btn.dataset[lang];
-  });
+  document.getElementById("status").textContent=
+    lang==="si"?"ඔබ සතු හෝ අවසර ඇති මාධ්‍ය ගොනුවක සෘජු සබැඳියක් ඇතුළත් කරන්න."
+    :"Enter a direct URL to a file you own or are authorized to download.";
 });
 </script>
+<script type="module" src="firebase-auth.js"></script>
 </body>
 </html>
