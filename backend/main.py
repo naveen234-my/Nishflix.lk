@@ -11,7 +11,7 @@ app = FastAPI(title="Nishflix LK Media API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://naveen234-my.github.io"],
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
