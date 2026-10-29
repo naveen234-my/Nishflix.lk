@@ -85,7 +85,7 @@ p{color:var(--muted);line-height:1.6}
 button:active{transform:scale(.98)}
 .field{margin:14px 0}
 label{display:block;font-size:13px;color:#e0e0f3;margin-bottom:8px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .notice{
   background:#111123;border:1px solid #373752;border-radius:12px;
   padding:13px;font-size:12px;color:#c1c4dd;
@@ -392,7 +392,7 @@ async function saveLocalFile(){
   formData.append("quality", quality);
 
   // Local testing only. Use your HTTPS cloud API URL after deployment.
-  const API_BASE = "http://127.0.0.1:8000";
+  const API_BASE = "https://shevonweerasinghe21.blitz.cloud";
 
   status.textContent = "Uploading and processing...";
 
