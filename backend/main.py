@@ -5,9 +5,18 @@ import subprocess
 from pathlib import Path
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import FileResponse
+from fastapi import Request
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 from fastapi.middleware.cors import CORSMiddleware
-
 app = FastAPI(title="Nishflix LK Media API")
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(
+    RateLimitExceeded,
+    _rate_limit_exceeded_handler
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,7 +35,9 @@ def health():
     return {"ok": True, "service": "Nishflix LK Media API"}
 
 @app.post("/process")
+@limiter.limit("5/minute")
 async def process_media(
+    request: Request,
     file: UploadFile = File(...),
     mode: str = Form(...),
     quality: str = Form("original"),
